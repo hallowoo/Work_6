@@ -28,6 +28,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PopPad|Swoosh")
 	bool IsSwoosh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PopPad|Swoosh")
+	float SwooshTimeMax;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PopPad|Swoosh")
+	float SwooshTimeMin;
+
 	float SwooshTime;
 	
 	

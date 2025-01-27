@@ -21,7 +21,7 @@ protected:
 	USceneComponent* SceneRoot;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SpawnActor|Components")
-	class UBoxComponent* SpawnExtent;
+	class UBoxComponent* SpawnVolume;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RandomPuzzle | Components")
 	TSubclassOf<AActor> SpawnClass;
@@ -33,6 +33,8 @@ protected:
 	int CourseWidth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RandomPuzzle | Properties")
 	float Interval;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RandomPuzzle | Properties")
+	float ZUpValue;
 
 	FVector MoveLocation;
 	int PrevRand;

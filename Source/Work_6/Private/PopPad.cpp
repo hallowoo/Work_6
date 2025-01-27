@@ -13,6 +13,9 @@ APopPad::APopPad()
 	RotationSpeed = FVector3f(0.0f, 0.0f, 0.0f);
 	RotationSpeedCheck = RotationSpeed.X + RotationSpeed.Y + RotationSpeed.Z;
 
+	SwooshTimeMax = 0;
+	SwooshTimeMin = 0;
+
 	SwooshTime = 0;
 	IsSwoosh = false;
 	SwooshSumTime;
@@ -22,13 +25,13 @@ APopPad::APopPad()
 void APopPad::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SwooshTime = FMath::RandRange(SwooshTimeMin, SwooshTimeMax);
 }
 
 void APopPad::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	SwooshSumTime += DeltaTime;
+	SwooshSumTime += DeltaTime;	
 	SwooshComponent(StaticMeshComp, SwooshSumTime);
 	AddActorRotation(DeltaTime);
 }
@@ -41,6 +44,7 @@ void APopPad::AddActorRotation(float DeltaTime)
 
 void APopPad::SwooshComponent(UStaticMeshComponent* ComponentName, float &Time)
 {
+	
 	if (Time >= SwooshTime && IsSwoosh)
 	{
 		ComponentName->ToggleVisibility();
@@ -48,11 +52,13 @@ void APopPad::SwooshComponent(UStaticMeshComponent* ComponentName, float &Time)
 		if (ToggleCount == 0)
 		{
 			ComponentName->SetCollisionProfileName("NoCollision");
+			SwooshTime = FMath::RandRange(SwooshTimeMin, SwooshTimeMax);
 			ToggleCount++;
 		}
 		else if (ToggleCount == 1)
 		{
 			ComponentName->SetCollisionProfileName("Default");
+			SwooshTime = FMath::RandRange(SwooshTimeMin, SwooshTimeMax);
 			ToggleCount = 0;
 		}
 	}
