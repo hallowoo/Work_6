@@ -45,21 +45,24 @@ void APopPad::AddActorRotation(float DeltaTime)
 void APopPad::SwooshComponent(UStaticMeshComponent* ComponentName, float &Time)
 {
 	
-	if (Time >= SwooshTime && IsSwoosh)
-	{
-		ComponentName->ToggleVisibility();
-		Time = 0;
-		if (ToggleCount == 0)
+	if (IsSwoosh)
+	{		
+		if (ToggleCount == 0 && Time >= SwooshTime)
 		{
+			ComponentName->ToggleVisibility();
 			ComponentName->SetCollisionProfileName("NoCollision");
 			SwooshTime = FMath::RandRange(SwooshTimeMin, SwooshTimeMax);
-			ToggleCount++;
+			ToggleCount = 1;
+			Time = 0;
+
 		}
-		else if (ToggleCount == 1)
+		else if (ToggleCount == 1 && Time >= SwooshTime/3)
 		{
+			ComponentName->ToggleVisibility();
 			ComponentName->SetCollisionProfileName("Default");
 			SwooshTime = FMath::RandRange(SwooshTimeMin, SwooshTimeMax);
 			ToggleCount = 0;
+			Time = 0;
 		}
 	}
 }

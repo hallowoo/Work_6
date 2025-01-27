@@ -4,8 +4,9 @@
 #include "RandomPuzzle.h"
 #include "Components/BoxComponent.h"
 #include <algorithm>
-SS
-// Sets default values
+
+using namespace std;
+
 ARandomPuzzle::ARandomPuzzle()
 {
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultSceneRoot"));
@@ -33,7 +34,6 @@ ARandomPuzzle::ARandomPuzzle()
 	SpawnNumber = 0;
 }
 
-// Called when the game starts or when spawned
 void ARandomPuzzle::BeginPlay()
 {
 	Super::BeginPlay();
